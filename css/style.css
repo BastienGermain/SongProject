@@ -1,0 +1,65 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+#viewport {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  perspective: 100vw;
+}
+
+#viewport section {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+}
+
+div.cube {
+  transform-style: preserve-3d;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  position: absolute;
+  transform: translateZ(50vw);
+  animation: rotation3d 3s ease-in-out infinite;
+}
+
+.cube > div {
+  width: 100vw;
+  position: absolute;
+  height: 100%;
+}
+
+.cube .front {
+  transform: translateZ(50vw);
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.cube .left {
+  transform: translateX(50vw) rotateY(90deg);
+  background-color: rgba(0, 255, 0, 0.5);
+}
+
+.cube .back {
+  transform: translateZ(-50vw);
+  background-color: rgba(0, 0, 255, 0.5);
+}
+
+@keyframes rotation3d {
+  0% {
+    transform: translateZ(50vw) rotateY(0deg);
+  }
+  49% {
+    transform: translateZ(50vw) rotateY(90deg);
+  }
+
+  51% {
+    transform: translateZ(50vw) rotateY(90deg);
+  }
+
+  100% {
+    transform: translateZ(50vw) rotateY(180deg);
+  }
+}
