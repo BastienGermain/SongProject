@@ -1,6 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  background: radial-gradient(ellipse at center, #505768 0%,#191919 100%);
 }
 
 #viewport {
@@ -30,21 +31,24 @@ div.cube {
   width: 100vw;
   position: absolute;
   height: 100%;
+  border: 1px solid white;
+  background: radial-gradient(ellipse at center, rgba(25, 25, 25, 0) 0%,rgba(25, 25, 25, 0.8) 100%);
+
 }
 
 .cube .front {
   transform: translateZ(50vw);
-  background-color: rgba(255, 0, 0, 0.5);
+  /*background-color: rgba(255, 0, 0, 0.5);*/
 }
 
 .cube .left {
   transform: translateX(50vw) rotateY(90deg);
-  background-color: rgba(0, 255, 0, 0.5);
+  /*background-color: rgba(0, 255, 0, 0.5);*/
 }
 
 .cube .back {
   transform: translateZ(-50vw);
-  background-color: rgba(0, 0, 255, 0.5);
+  /*background-color: rgba(0, 0, 255, 0.5);*/
 }
 
 @keyframes rotation3d {
