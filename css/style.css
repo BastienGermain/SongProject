@@ -28,6 +28,7 @@ div.cube {
   margin: auto;
   position: absolute;
   transform: translateZ(50vw);
+  transition: 1.5s ease-in-out;
   /*animation: rotation3d 3s ease-in-out infinite;*/
 }
 
