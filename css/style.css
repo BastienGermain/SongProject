@@ -154,6 +154,7 @@ body {
   height: 100vh;
   width: 100vw;
   position: absolute;
+  perspective: inherit;
 }
 div.cube {
   -webkit-transform-style: preserve-3d;
