@@ -164,7 +164,7 @@ div.cube {
   position: absolute;
   -webkit-transform: translateZ(50vw);
           transform: translateZ(50vw);
-  transition: 1.5s ease-in-out;
+/*animation: rotation3d 3s ease-in-out infinite;*/
 }
 .cube > div {
   width: 100vw;

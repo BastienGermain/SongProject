@@ -15,6 +15,7 @@ function turn(e) {
   } else if (e.key == "ArrowRight") {
     turnBox(90);
   }
+
 }
 
 function turnBox(param) {
@@ -22,5 +23,4 @@ function turnBox(param) {
   if(cube !== undefined) {
     cube.style.transform = Z + "rotateY("+degree+"deg)";
   }
-  console.log(degree);
 }
