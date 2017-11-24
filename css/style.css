@@ -138,7 +138,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: radial-gradient(ellipse at center, #505768 0%, #191919 100%);
+  background: #000;
 }
 * {
   box-sizing: border-box;
@@ -164,7 +164,7 @@ div.cube {
   position: absolute;
   -webkit-transform: translateZ(50vw);
           transform: translateZ(50vw);
-  transition: 1.5s ease-in-out;
+/*animation: rotation3d 3s ease-in-out infinite;*/
 }
 .cube > div {
   width: 100vw;

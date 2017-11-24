@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 
 
 gulp.task('html', function() {
-    gulp.src('app/*.html')
+    gulp.src('*.html')
         // .pipe(gulp.dest('dist/'))
         .pipe(sync.stream());
 });
@@ -29,8 +29,8 @@ gulp.task('css', ['stylus'], function() {
 
     return gulp.src('css/*.css')
         .pipe(postcss([ autoprefixer() ]))
-        .pipe(sync.stream())
-        .pipe(gulp.dest('css/'));
+        .pipe(gulp.dest('css/'))
+        .pipe(sync.stream());
 });
 
 gulp.task('javascript', function() {
@@ -43,14 +43,14 @@ gulp.task('javascript', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['app/stylus/**/*.styl'], ['css']);
-  gulp.watch(['app/*.html'], ['html']);
-  gulp.watch(['app/js/*.js'], ['javascript']);
+  gulp.watch(['stylus/**/*.styl'], ['css']);
+  gulp.watch(['*.html'], ['html']);
+  gulp.watch(['js/*.js'], ['javascript']);
 });
 
 gulp.task('sync', ['html', 'stylus', 'css', 'javascript', 'watch'], function() {
     sync.init({
-        server: __dirname //+ '/dist'
+        server: __dirname + '/'
     });
 });
 
