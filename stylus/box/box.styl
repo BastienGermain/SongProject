@@ -38,21 +38,20 @@ div.cube {
   position: absolute;
   height: 100%;
   border: 1px solid white;
-  background: radial-gradient(ellipse at center, rgba(25, 25, 25, 0) 0%,rgba(25, 25, 25, 0.8) 100%);
   backface-visibility: hidden;
 }
 
-.cube .front {
+.cube .lyrics__section {
   transform: translateZ(50vw) rotateY(180deg);
   /*background-color: rgba(255, 0, 0, 0.5);*/
 }
 
-.cube .left {
+.cube .list__section {
   transform: translateX(50vw) rotateY(-90deg);
   /*background-color: rgba(0, 255, 0, 0.5);*/
 }
 
-.cube .back {
+.cube .search__section {
   transform: translateZ(-50vw);
   /*background-color: rgba(0, 0, 255, 0.5);*/
 }
