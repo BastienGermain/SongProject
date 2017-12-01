@@ -1,4 +1,4 @@
-var url ="http://api.musixmatch.com/ws/1.1/track.search?apikey=0b87e68516c5e3ca3841fb358f30889c&page=1&page_size="; 
+var url ="http://api.musixmatch.com/ws/1.1/track.search?apikey=0b87e68516c5e3ca3841fb358f30889c&page=1&page_size=";
 var nb_result = 3;
 
 $(document).ready(function(){
@@ -27,10 +27,10 @@ $(document).ready(function(){
                     $("#result").append("<button class='listen'>Listen !</button>");
                 }
                 turnBox(90);
-                
+
             },
 
-         
+
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown)
             }
