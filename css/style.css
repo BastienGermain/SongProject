@@ -165,8 +165,9 @@ div.cube {
   height: 100vh;
   margin: auto;
   position: absolute;
-  -webkit-transform: translateZ(50vw);
-          transform: translateZ(50vw);
+/*transform: translateZ(50vw);*/
+  -webkit-transform-origin: 50vw 50vh 50vw;
+          transform-origin: 50vw 50vh 50vw;
   transition: -webkit-transform 1s ease-in-out;
   transition: transform 1s ease-in-out;
   transition: transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
@@ -179,21 +180,18 @@ div.cube {
   border: 1px solid #fff;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
+  -webkit-transform-style: initial;
+          transform-style: initial;
 }
 .cube .lyrics__section {
-  -webkit-transform: translateZ(50vw) rotateY(180deg);
-          transform: translateZ(50vw) rotateY(180deg);
+  -webkit-transform: translateZ(100vw) rotateY(180deg);
+          transform: translateZ(100vw) rotateY(180deg);
 /*background-color: rgba(255, 0, 0, 0.5);*/
 }
 .cube .list__section {
-  -webkit-transform: translateX(50vw) rotateY(-90deg);
-          transform: translateX(50vw) rotateY(-90deg);
+  -webkit-transform: translateX(50vw) translateZ(50vw) rotateY(-90deg);
+          transform: translateX(50vw) translateZ(50vw) rotateY(-90deg);
 /*background-color: rgba(0, 255, 0, 0.5);*/
-}
-.cube .search__section {
-  -webkit-transform: translateZ(-50vw);
-          transform: translateZ(-50vw);
-/*background-color: rgba(0, 0, 255, 0.5);*/
 }
 .arrow {
   position: absolute;
