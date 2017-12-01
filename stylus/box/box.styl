@@ -28,7 +28,8 @@ div.cube {
   height: 100vh;
   margin: auto;
   position: absolute;
-  transform: translateZ(50vw);
+  /*transform: translateZ(50vw);*/
+  transform-origin: 50vw 50vh 50vw;
   transition: transform 1s ease-in-out;
   /*animation: rotation3d 3s ease-in-out infinite;*/
 }
@@ -39,20 +40,20 @@ div.cube {
   height: 100%;
   border: 1px solid white;
   backface-visibility: hidden;
+  transform-style: initial;
 }
 
 .cube .lyrics__section {
-  transform: translateZ(50vw) rotateY(180deg);
+  transform: translateZ(100vw) rotateY(180deg);
   /*background-color: rgba(255, 0, 0, 0.5);*/
 }
 
 .cube .list__section {
-  transform: translateX(50vw) rotateY(-90deg);
+  transform: translateX(50vw) translateZ(50vw) rotateY(-90deg);
   /*background-color: rgba(0, 255, 0, 0.5);*/
 }
 
 .cube .search__section {
-  transform: translateZ(-50vw);
   /*background-color: rgba(0, 0, 255, 0.5);*/
 }
 

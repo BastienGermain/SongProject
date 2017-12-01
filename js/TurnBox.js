@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", init, false);
 
 var degree = 0;
 var cube;
-const Z = "translateZ(50vw) ";
 
 function init() {
   cube = document.getElementsByClassName("cube")[0];
@@ -21,6 +20,6 @@ function turn(e) {
 function turnBox(param) {
   degree += param;
   if(cube !== undefined) {
-    cube.style.transform = Z + "rotateY("+degree+"deg)";
+    cube.style.transform = "rotateY("+degree+"deg)";
   }
 }
