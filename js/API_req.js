@@ -13,24 +13,22 @@ $(document).ready(function(){
 
         $.ajax({
             url: req,
+            success: function(data) {
 
-            success: function (data) {
                 var obj = JSON.parse(data);
+                console.log(obj.message.body);
 
                 $("#result").empty();
 
-
                 for(i = 0; i < nb_result; i++) {
-                    $("#result").append("<p>Track : " + obj.message.body.track_list[i].track.track_name + "</p>");
-                    $("#result").append("<p>Artist : " + obj.message.body.track_list[i].track.artist_name + "</p>");
-                    $("#result").append("<p>Album : " + obj.message.body.track_list[i].track.album_name + "</p>");
-                    $("#result").append("<button class='listen'>Listen !</button>");
+                    var result = obj.message.body.track_list[i].track;
+
+                    $("#result").append("<p>Track : " + result.track_name + "</p><p>Artist : " + result.artist_name + "</p><p>Album : " + result.album_name + "</p><button class='listen' data-track='" + result.track_id + "'>Listen !</button>");
                 }
+                
                 turnBox(90);
                 
-            },
-
-         
+            },         
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown)
             }
@@ -39,6 +37,7 @@ $(document).ready(function(){
     });
 
     $('body').on('click', '.listen', function(){
+        console.log($(this).data("track"));
         turnBox(90);
     });
 });
