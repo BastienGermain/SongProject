@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,700" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/TurnBox.js"></script>
@@ -13,24 +14,18 @@
     <div id="viewport">
       <section>
         <div class="cube">
-          <div class="back">
+          <div class="search__section">
+            <h1 class="search__logo">SongProject</h1>
             <form id="lyrics_form">
-              <input type="text" id="search"/>
-              <input type="submit"/>
+              <input type="text" placeholder="It's close to midnight" id="search">
+              <input type="submit" id="submit" value="Search">
             </form>
-            <a class="btn-left arrow">
-              <i class="fa fa-arrow-circle-left fa-5x" aria-hidden="true" id="test"></i>
-            </a>
           </div>
-          <div class="left">
-            <p style="font-size: 40px; color: white;">Result :</p>
+          <div class="list__section">
             <div id="result" style="font-size: 40px; color: lime;">
             </div>
-            <a class="btn-left arrow">
-              <i class="fa fa-arrow-circle-left fa-5x" aria-hidden="true"></i>
-            </a>
           </div>
-          <div class="front">
+          <div class="lyrics__section">
             <a class="btn-left arrow">
               <i class="fa fa-arrow-circle-left fa-5x" aria-hidden="true"></i>
             </a>
