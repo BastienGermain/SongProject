@@ -8,10 +8,16 @@ $(document).ready(function(){
             console.log(nbSuggestion, inputValue, key);
     }
 
+    /* Corrige le retour du curseur */   
+    $("#search").keydown(function(e) {
+        if (e.keyCode === 38 || e.keyCode === 40) 
+        return false;
+    });
 
     $("#search").keyup(function(e) {
-/////////////////////////////////////////////////////
-        e.preventDefault();
+
+        var pos = this.selectionStart;
+
         var address = $("#search").val();
 
         var req = url + limit + "&q=" + address;
@@ -35,7 +41,8 @@ $(document).ready(function(){
             }
 
         });
-/////////////////////////////////////////////////////
+
+        this.selectionStart = pos; this.selectionEnd = pos;
     });
 
     $('body').on('click', '.listen', function(){
