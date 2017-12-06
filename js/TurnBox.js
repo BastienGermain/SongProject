@@ -9,12 +9,13 @@ function init() {
 }
 
 function turn(e) {
-  if(e.key == "ArrowLeft") {
-    turnBox(-90);
-  } else if (e.key == "ArrowRight") {
-    turnBox(90);
+  if(document.activeElement === document.body) {
+    if(e.key == "ArrowLeft") {
+      turnBox(-90);
+    } else if (e.key == "ArrowRight") {
+      turnBox(90);
+    }
   }
-
 }
 
 function turnBox(param) {
