@@ -7,7 +7,7 @@ function findAdresse(adresse) {
   uluru.lng = adresse[1];
 
   var marker = new google.maps.Marker({
-    position: uluru,
+    position: uluru
   });
   marker.setMap(map);
   map.setCenter(uluru);
@@ -26,7 +26,8 @@ $(document).ready(function() {
 
 function initMap() {
         map = new google.maps.Map($('#result').get(0), {
-          zoom: 4
+          zoom: 4,
+          center: uluru
         });
 
 }
