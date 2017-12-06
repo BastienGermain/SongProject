@@ -6,12 +6,17 @@ function findAdresse(adresse) {
   uluru.lat = adresse.geometry.coordinates[0];
   uluru.lng = adresse.geometry.coordinates[1];
 
-  async defer
-      src="https://maps.googleapis.com/maps/api/js?key="+APICODE+"&callback="+initMap.name;
+  var src="https://maps.googleapis.com/maps/api/js?key="+APICODE+"&callback="+initMap.name;
+
+  var script = $("<script async defer></script");
+  script.src = src;
+
+  $('#result').append(script);
+
 }
 
 function initMap() {
-        var map = new google.maps.Map(document.getElementById('result'), {
+        var map = new google.maps.Map($('#result').get(0), {
           zoom: 4,
           center: uluru
         });
