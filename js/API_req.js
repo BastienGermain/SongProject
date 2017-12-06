@@ -16,7 +16,8 @@ $(document).ready(function(){
             success: function(data) {
 
                 var obj = JSON.parse(data);
-                console.log(obj.message.body);
+                console.log("data", data);
+                console.log("obj.message.body", obj.message.body);
 
                 $("#result").empty();
 

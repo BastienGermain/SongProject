@@ -6,9 +6,13 @@
   flex-direction column
   align-items: center
   justify-content: center
+#lyrics__form
+  display flex
+  align-items center
+  justify-content: center
+  position: relative
 #search
-  width: 50%
-  max-width 500px
+  width 500px
   height 50px
   padding 0 15px
   font-family Barlow Condensed
@@ -34,9 +38,32 @@
   border-radius 5px
   color white
   background none
-  margin-top 20px
+  margin-left 20px
   padding 5px 10px
 .search__logo
   font-size 50px
   color white
   margin-bottom 20px
+.search__results
+  position: absolute
+  top: 100%
+  margin-top: 10px
+  width: 500px
+  left: 0
+  font-family Barlow Condensed
+  font-size 20px
+  font-weight bold
+  text-align center
+  color #514A9D
+  background: none
+  border none
+  border-radius 5px
+  background-color white
+.search__singleResult
+  display flex
+  align-items center
+  justify-content: center
+  height 50px
+  padding 0 15px
+  &:not(:last-child)
+    border-bottom 1px solid rgba(0, 0, 0, .25)
