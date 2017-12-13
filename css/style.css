@@ -276,7 +276,6 @@ div.cube {
   font-family: Barlow Condensed;
   font-size: 20px;
   font-weight: bold;
-  text-align: center;
   color: #514a9d;
   background: none;
   border: none;
@@ -321,7 +320,6 @@ div.cube {
   font-family: Barlow Condensed;
   font-size: 20px;
   font-weight: bold;
-  text-align: center;
   color: #514a9d;
   background: none;
   border: none;
@@ -335,14 +333,15 @@ div.cube {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   height: 50px;
   padding: 0 15px;
+  cursor: pointer;
 }
-.search__singleResult:not(:last-child) {
-  border-bottom: 1px solid rgba(0,0,0,0.25);
+.search__singleResult:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+.search__singleResult.selected {
+  background-color: rgba(0,0,0,0.05);
 }
 .list__section {
   display: -webkit-box;
