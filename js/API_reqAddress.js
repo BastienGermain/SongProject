@@ -60,13 +60,11 @@ $(document).ready(function(){
 
     var url_cinema = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=etablissements-cinematographiques&q=";
 
-    $('#lyrics__form').submit(function(e) {
-
-        e.preventDefault();
-        console.log(address);
+    function lanceRequete(valeur) {
+        console.log(valeur);
 
          $.ajax({
-            url: url_cinema + address + "&facet=region_administrative",
+            url: url_cinema + valeur + "&facet=region_administrative",
             success: function(data) {
                 var length = data.records.length;
                 for(i = 0; i < length; i++) {
@@ -84,5 +82,17 @@ $(document).ready(function(){
 
 
         turnBox(90);
+    }
+
+    $('#lyrics__form').submit(function(e) {
+        e.preventDefault();
+        lanceRequete($("#search").val());
     });
+
+    $('body').on('click', '.search__singleResult',function(e) {
+        e.preventDefault();
+        lanceRequete($(this).text());
+    });
+
+    
 });
