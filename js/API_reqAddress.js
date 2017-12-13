@@ -2,6 +2,7 @@ var url ="https://api-adresse.data.gouv.fr/search/?limit=";
 var nbResult = 5;
 var oldAdress = "";
 var address, nbSuggestion, selected;
+
 $(document).ready(function(){
 
     function selectSuggestion(key) {

@@ -1,16 +1,16 @@
 const APIKEY = "AIzaSyDNaCN1rRf2iAAhFmgT0tQ2LIzNf6UM5ws";
-let uluru = {lat: 0.0, lng: 0.0};
+let coord = {lat: 0.0, lng: 0.0};
 let map;
 
 function findAdresse(adresse) {
-  uluru.lat = adresse[0];
-  uluru.lng = adresse[1];
+  coord.lat = adresse[0];
+  coord.lng = adresse[1];
 
   var marker = new google.maps.Marker({
-    position: uluru
+    position: coord
   });
   marker.setMap(map);
-  map.setCenter(uluru);
+  map.setCenter(coord);
 
 }
 
@@ -25,9 +25,8 @@ $(document).ready(function() {
 
 
 function initMap() {
-        map = new google.maps.Map($('#result').get(0), {
-          zoom: 4,
-          center: uluru
-        });
-
+    map = new google.maps.Map($('#result').get(0), {
+      zoom: 4,
+      center: coord
+    });
 }
