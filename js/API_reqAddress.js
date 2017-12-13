@@ -52,9 +52,9 @@ $(document).ready(function(){
                         console.log(jqXHR, textStatus, errorThrown)
                     }
                 });
-            } else {
-                selectSuggestion(e.which);
             }
+        } else {
+            selectSuggestion(e.which);
         }
     });
 
