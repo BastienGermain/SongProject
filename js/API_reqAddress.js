@@ -9,7 +9,8 @@ var oldAdress = "";
 var address, nbSuggestion, selected;
 
 $(document).ready(function(){
-
+//turn();
+/* Selection des suggestion */
     function selectSuggestion(key) {
         if (key == 40) { /* down arrow */
             selected = (selected == nbSuggestion) ? 0 : selected + 1;
@@ -39,8 +40,10 @@ $(document).ready(function(){
     $("#search").keyup(function(e) {
         if (e.which !== 38 && e.which !== 40) {
             address = $("#search").val();
-
-            if (address !== oldAdress) {
+            if (address == "") {
+                $(".search__results").empty();
+            }
+            else if (address !== oldAdress) {
                 oldAdress = address;
                 var req = url_adresse + nbResult + "&q=" + address;
 
@@ -69,25 +72,57 @@ $(document).ready(function(){
         }
     });
 
-    /* 
-    *   Requete API Ministère Culture (liste cinemas) 
-    */
+    /* Requete API Ministère Culture (liste cinemas) */
+    // var url_cinema = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=etablissements-cinematographiques&q=";
 
-    var url_cinema = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=etablissements-cinematographiques&q=";
+    // function lanceRequete(valeur) {
+    //     console.log(valeur);
+
+    //      $.ajax({
+    //         url: url_cinema + valeur + "&facet=region_administrative",
+    //         success: function(data) {
+    //             var length = data.records.length;
+    //             for(i = 0; i < length; i++) {
+    //                 console.log(data.records[i].fields.nom);
+    //                 console.log(data.records[i].fields.corrdonnees_finales[0]); // latitude 
+    //                 console.log(data.records[i].fields.corrdonnees_finales[1]); // longitude 
+
+    //                 findAdresse(data.records[i].fields.corrdonnees_finales);
+    //             }               
+    //         }, 
+    //         error: function(jqXHR, textStatus, errorThrown) {
+    //             console.log(jqXHR, textStatus, errorThrown)
+    //         }
+    //     });
+    //     turnBox(90);
+    // }
+
+    // /* Lance la recherche à la soumission du formulaire */
+
+    // $('#address__form').submit(function(e) {
+    //     e.preventDefault();
+    //     lanceRequete($("#search").val());
+    // });
+
+    // /* Lance la recherche au click sur les suggestions */
+
+    // $('body').on('click', '.search__singleResult',function(e) {
+    //     e.preventDefault();
+    //     lanceRequete($(this).text());
+    // });
+       /* Requete API Ministère Culture (liste musées) */
+    var url_cinema = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=";
 
     function lanceRequete(valeur) {
         console.log(valeur);
 
          $.ajax({
-            url: url_cinema + valeur + "&facet=region_administrative",
+            url: url_cinema + valeur + "&facet=new_name&facet=nomdep",
             success: function(data) {
                 var length = data.records.length;
                 for(i = 0; i < length; i++) {
-                    console.log(data.records[i].fields.nom);
-                    console.log(data.records[i].fields.corrdonnees_finales[0]); // latitude 
-                    console.log(data.records[i].fields.corrdonnees_finales[1]); // longitude 
-
-                    findAdresse(data.records[i].fields.corrdonnees_finales);
+                    var coordonnees_finales = data.records[i].fields.coordonnees_finales;
+                    findAdresse(coordonnees_finales);
                 }               
             }, 
             error: function(jqXHR, textStatus, errorThrown) {
@@ -97,8 +132,9 @@ $(document).ready(function(){
         turnBox(90);
     }
 
+    /* Lance la recherche à la soumission du formulaire */
 
-    $('#lyrics__form').submit(function(e) {
+    $('#address__form').submit(function(e) {
         e.preventDefault();
         lanceRequete($("#search").val());
     });
@@ -107,6 +143,7 @@ $(document).ready(function(){
 
     $('body').on('click', '.search__singleResult',function(e) {
         e.preventDefault();
+        $("#search").val($(this).text());
         lanceRequete($(this).text());
     });
 

@@ -187,7 +187,7 @@ div.cube {
           transform: translateZ(100vw) rotateY(180deg);
 /*background-color: rgba(255, 0, 0, 0.5);*/
 }
-.cube .list__section {
+.cube .map__section {
   -webkit-transform: translateX(50vw) translateZ(50vw) rotateY(-90deg);
           transform: translateX(50vw) translateZ(50vw) rotateY(-90deg);
 /*background-color: rgba(0, 255, 0, 0.5);*/
@@ -244,8 +244,7 @@ div.cube {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background: #24c6dc;
-  background: linear-gradient(to right, #514a9d, #24c6dc);
+  background-color: #808080;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -257,7 +256,7 @@ div.cube {
       -ms-flex-pack: center;
           justify-content: center;
 }
-#lyrics__form {
+#address__form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -276,11 +275,11 @@ div.cube {
   font-family: Barlow Condensed;
   font-size: 20px;
   font-weight: bold;
-  color: #514a9d;
+  color: #696969;
   background: none;
   border: none;
   border-radius: 5px;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.8);
 }
 #search:focus {
   border: none;
@@ -294,6 +293,9 @@ div.cube {
 }
 #search::placeholder {
   color: rgba(0,0,0,0.25);
+}
+#search:not(:focus) ~ .search__results {
+  opacity: 0;
 }
 #submit {
   font-family: Barlow Condensed;
@@ -320,7 +322,7 @@ div.cube {
   font-family: Barlow Condensed;
   font-size: 20px;
   font-weight: bold;
-  color: #514a9d;
+  color: #696969;
   background: none;
   border: none;
   border-radius: 5px;

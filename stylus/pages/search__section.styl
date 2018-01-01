@@ -1,12 +1,10 @@
 .search__section
   display flex
-  background: #24C6DC;
-  background: -webkit-linear-gradient(to right, #514A9D, #24C6DC);
-  background: linear-gradient(to right, #514A9D, #24C6DC);
+  background-color: gray;
   flex-direction column
   align-items: center
   justify-content: center
-#lyrics__form
+#address__form
   display flex
   align-items center
   justify-content: center
@@ -18,17 +16,19 @@
   font-family Barlow Condensed
   font-size 20px
   font-weight bold
-  color #514A9D
+  color dimgray
   background: none
   border none
   border-radius 5px
-  background-color rgba(255, 255, 255, .5)
+  background-color rgba(255, 255, 255, .8)
   //text-transform uppercase
   &:focus
     border none
     background-color white
   &::placeholder  
      color rgba(0, 0, 0, .25)
+  &:not(:focus) ~ .search__results
+    opacity 0
 #submit
   font-family Barlow Condensed
   font-size 20px
@@ -52,7 +52,7 @@
   font-family Barlow Condensed
   font-size 20px
   font-weight bold
-  color #514A9D
+  color dimgray
   background: none
   border none
   border-radius 5px
