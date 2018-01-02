@@ -3,8 +3,9 @@ let coord = {lat: 0.0, lng: 0.0};
 let map;
 
 function findAdresse(adresse) {
-  coord.lat = adresse[0];
-  coord.lng = adresse[1];
+  //console.log(adresse);
+  coord.lat = adresse[0] || adresse.lat();
+  coord.lng = adresse[1] || adresse.lng();
 
   var marker = new google.maps.Marker({
     position: coord

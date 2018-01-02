@@ -35,7 +35,7 @@ $(document).ready(function(){
 
     /* Corrige le bug du retour du curseur au début de l'input */
     $("#search").keydown(function(e) {
-        if (e.which == 38 || e.which == 40) 
+        if (e.which == 38 || e.which == 40)
         return false;
     });
 
@@ -52,18 +52,18 @@ $(document).ready(function(){
                 $.ajax({
                     url: req,
                     success: function(data) {
-                        
+
                         $(".search__results").empty();
                         var suggestion = data['features'];
                         nbSuggestion = suggestion.length;
                         if (nbSuggestion !== 0) {
                             for (var i = 0; i < nbSuggestion; i++) {
                                 $(".search__results").append('<div class="search__singleResult" id="' + suggestion[i]['properties']['id'] + '">' + suggestion[i]['properties']['label'] + '</div>');
-                            }  
+                            }
                         }
                         selected = nbSuggestion;
-                        
-                    }, 
+
+                    },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR, textStatus, errorThrown)
                     }
@@ -85,13 +85,23 @@ $(document).ready(function(){
             url: url_musee + valeur + "&facet=new_name&facet=nomdep",
             success: function(data) {
                 console.log(data);
-                
+
                 var length = data.records.length;
                 for(i = 0; i < length; i++) {
                     var coordonnees_finales = data.records[i].fields.coordonnees_finales;
-                    findAdresse(coordonnees_finales);
-                }               
-            }, 
+                    if(coordonnees_finales !== undefined) {
+                      findAdresse(coordonnees_finales);
+                    } else {
+                      var geocoder = new google.maps.Geocoder();
+                      geocoder.geocode( { 'address': data.records[i].fields.adr}, function( data, status) {
+                        if( status == google.maps.GeocoderStatus.OK) {
+                          coordonnees_finales = data[0].geometry.location;
+                          findAdresse(coordonnees_finales);
+                        }
+                    });
+                  }
+                }
+            },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown)
             }
@@ -113,5 +123,5 @@ $(document).ready(function(){
         lanceRequete($(this).text());
     });
 
-    
+
 });
