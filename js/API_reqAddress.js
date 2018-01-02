@@ -1,16 +1,18 @@
-/* Variable API adresse */
-
-var url_adresse ="https://api-adresse.data.gouv.fr/search/?limit=";
-var nbResult = 5;
-
-/* Variable globales */
+/* Variables globales */
 
 var oldAdress = "";
 var address, nbSuggestion, selected;
 
+/* Variables API adresse */
+
+var url_adresse ="https://api-adresse.data.gouv.fr/search/?limit=";
+var nbResult = 5;
+
+
 $(document).ready(function(){
-//turn();
-/* Selection des suggestion */
+
+/* Selection des suggestions */
+
     function selectSuggestion(key) {
         if (key == 40) { /* down arrow */
             selected = (selected == nbSuggestion) ? 0 : selected + 1;
@@ -72,53 +74,18 @@ $(document).ready(function(){
         }
     });
 
-    /* Requete API Ministère Culture (liste cinemas) */
-    // var url_cinema = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=etablissements-cinematographiques&q=";
+    /* Requete API Ministère Culture (liste musées) */
 
-    // function lanceRequete(valeur) {
-    //     console.log(valeur);
-
-    //      $.ajax({
-    //         url: url_cinema + valeur + "&facet=region_administrative",
-    //         success: function(data) {
-    //             var length = data.records.length;
-    //             for(i = 0; i < length; i++) {
-    //                 console.log(data.records[i].fields.nom);
-    //                 console.log(data.records[i].fields.corrdonnees_finales[0]); // latitude 
-    //                 console.log(data.records[i].fields.corrdonnees_finales[1]); // longitude 
-
-    //                 findAdresse(data.records[i].fields.corrdonnees_finales);
-    //             }               
-    //         }, 
-    //         error: function(jqXHR, textStatus, errorThrown) {
-    //             console.log(jqXHR, textStatus, errorThrown)
-    //         }
-    //     });
-    //     turnBox(90);
-    // }
-
-    // /* Lance la recherche à la soumission du formulaire */
-
-    // $('#address__form').submit(function(e) {
-    //     e.preventDefault();
-    //     lanceRequete($("#search").val());
-    // });
-
-    // /* Lance la recherche au click sur les suggestions */
-
-    // $('body').on('click', '.search__singleResult',function(e) {
-    //     e.preventDefault();
-    //     lanceRequete($(this).text());
-    // });
-       /* Requete API Ministère Culture (liste musées) */
-    var url_cinema = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=";
+    var url_musee = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=";
 
     function lanceRequete(valeur) {
         console.log(valeur);
 
          $.ajax({
-            url: url_cinema + valeur + "&facet=new_name&facet=nomdep",
+            url: url_musee + valeur + "&facet=new_name&facet=nomdep",
             success: function(data) {
+                console.log(data);
+                
                 var length = data.records.length;
                 for(i = 0; i < length; i++) {
                     var coordonnees_finales = data.records[i].fields.coordonnees_finales;
@@ -143,7 +110,6 @@ $(document).ready(function(){
 
     $('body').on('click', '.search__singleResult',function(e) {
         e.preventDefault();
-        $("#search").val($(this).text());
         lanceRequete($(this).text());
     });
 
