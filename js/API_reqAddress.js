@@ -132,7 +132,8 @@ $(document).ready(function(){
 
     $('#address__form').submit(function(e) {
         e.preventDefault();
-        lanceRequete($("#search").val());
+        var value = $("#search").val() || $("#search").attr("placeholder");
+        lanceRequete(value);
     });
 
     /* Lance la recherche au click sur les suggestions */
