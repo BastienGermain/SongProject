@@ -108,6 +108,10 @@ $(document).ready(function(){
                         var adresse_musee = data.records[i].fields.adr;
                         var site_web = data.records[i].fields.sitweb;
 
+                        if (horaires == undefined){
+                            horaires = 'Non renseignés';
+                        }
+
                         if(coordonnees_finales !== undefined) {
                             findAdresse(coordonnees_finales, nom_musee, horaires, adresse_musee, site_web);
                         }
