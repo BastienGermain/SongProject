@@ -84,7 +84,7 @@ $(document).ready(function(){
          $.ajax({
             url: url_musee + valeur + "&facet=new_name&facet=nomdep",
             success: function(data) {
-            
+
                 /* Centre la map sur la ville entrée */
                 var geocoder = new google.maps.Geocoder();
                 geocoder.geocode( { 'address': valeur}, function(data, status) {
@@ -104,7 +104,7 @@ $(document).ready(function(){
 
                         if(coordonnees_finales !== undefined) {
                             findAdresse(coordonnees_finales);
-                        } else { 
+                        } else {
                             geocoder.geocode( { 'address': data.records[i].fields.adr}, function(data, status) {
                                 if( status == google.maps.GeocoderStatus.OK) {
                                     coordonnees_finales = data[0].geometry.location;
@@ -115,13 +115,14 @@ $(document).ready(function(){
                     }
                 }
 
-                
+
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown)
             }
         });
         turnBox(90);
+        $("#search").trigger("blur");
     }
 
     /* Lance la recherche à la soumission du formulaire */
