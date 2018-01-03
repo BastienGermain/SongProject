@@ -47,7 +47,7 @@ $(document).ready(function(){
             }
             else if (address !== oldAdress) {
                 oldAdress = address;
-                var req = url_adresse + nbResult + "&q=" + address;
+                var req = url_adresse + nbResult + "&q=" + address + "&type=municipality";
 
                 $.ajax({
                     url: req,
@@ -84,23 +84,38 @@ $(document).ready(function(){
          $.ajax({
             url: url_musee + valeur + "&facet=new_name&facet=nomdep",
             success: function(data) {
-                console.log(data);
+            
+                /* Centre la map sur la ville entrée */
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode( { 'address': valeur}, function(data, status) {
+                    if( status == google.maps.GeocoderStatus.OK) {
+                        coordonnees_finales = data[0].geometry.location;
+                        centerMap(coordonnees_finales);
+                    }
+                });
 
-                var length = data.records.length;
-                for(i = 0; i < length; i++) {
-                    var coordonnees_finales = data.records[i].fields.coordonnees_finales;
-                    if(coordonnees_finales !== undefined) {
-                      findAdresse(coordonnees_finales);
-                    } else {
-                      var geocoder = new google.maps.Geocoder();
-                      geocoder.geocode( { 'address': data.records[i].fields.adr}, function( data, status) {
-                        if( status == google.maps.GeocoderStatus.OK) {
-                          coordonnees_finales = data[0].geometry.location;
-                          findAdresse(coordonnees_finales);
+                if(data.nhits == 0){
+                    $('#infos').append('<p>Pas de musée dans la ville</p>');
+                } else {
+                    var length = data.records.length;
+
+                    for(i = 0; i < length; i++) {
+                        var coordonnees_finales = data.records[i].fields.coordonnees_finales;
+
+                        if(coordonnees_finales !== undefined) {
+                            findAdresse(coordonnees_finales);
+                        } else { 
+                            geocoder.geocode( { 'address': data.records[i].fields.adr}, function(data, status) {
+                                if( status == google.maps.GeocoderStatus.OK) {
+                                    coordonnees_finales = data[0].geometry.location;
+                                    findAdresse(coordonnees_finales);
+                                }
+                            });
                         }
-                    });
-                  }
+                    }
                 }
+
+                
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown)

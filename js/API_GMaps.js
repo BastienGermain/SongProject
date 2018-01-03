@@ -2,8 +2,14 @@ const APIKEY = "AIzaSyDNaCN1rRf2iAAhFmgT0tQ2LIzNf6UM5ws";
 let coord = {lat: 0.0, lng: 0.0};
 let map;
 
+function centerMap(adresse){
+  coord.lat = adresse[0] || adresse.lat();
+  coord.lng = adresse[1] || adresse.lng();
+
+  map.setCenter(coord);
+}
+
 function findAdresse(adresse) {
-  //console.log(adresse);
   coord.lat = adresse[0] || adresse.lat();
   coord.lng = adresse[1] || adresse.lng();
 
@@ -11,7 +17,6 @@ function findAdresse(adresse) {
     position: coord
   });
   marker.setMap(map);
-  map.setCenter(coord);
 
 }
 
