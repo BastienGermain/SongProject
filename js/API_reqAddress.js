@@ -82,8 +82,9 @@ $(document).ready(function(){
         console.log(valeur);
 
          $.ajax({
-            url: url_musee + valeur + "&facet=new_name&facet=nomdep",
+            url: url_musee + valeur + "&facet=new_name&facet=nomdep&rows=100",
             success: function(data) {
+                console.log(data);
             
                 /* Centre la map sur la ville entrée */
                 var geocoder = new google.maps.Geocoder();
@@ -101,16 +102,13 @@ $(document).ready(function(){
 
                     for(i = 0; i < length; i++) {
                         var coordonnees_finales = data.records[i].fields.coordonnees_finales;
+                        var nom_musee = data.records[i].fields.nom_du_musee;
+                        var horaires = data.records[i].fields.periode_ouverture;
+                        var adresse_musee = data.records[i].fields.adr;
+                        var site_web = data.records[i].fields.sitweb;
 
                         if(coordonnees_finales !== undefined) {
-                            findAdresse(coordonnees_finales);
-                        } else { 
-                            geocoder.geocode( { 'address': data.records[i].fields.adr}, function(data, status) {
-                                if( status == google.maps.GeocoderStatus.OK) {
-                                    coordonnees_finales = data[0].geometry.location;
-                                    findAdresse(coordonnees_finales);
-                                }
-                            });
+                            findAdresse(coordonnees_finales, nom_musee, horaires, adresse_musee, site_web);
                         }
                     }
                 }
