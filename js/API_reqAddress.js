@@ -5,7 +5,7 @@ var address, nbSuggestion, selected;
 
 /* Variables API adresse */
 
-var url_adresse ="https://api-adresse.data.gouv.fr/search/?limit=";
+var url_adresse ="https://api-adresse.data.gouv.fr/search/?type=municipality&limit=";
 var nbResult = 5;
 
 
@@ -33,13 +33,16 @@ $(document).ready(function(){
         selectedValue.addClass('selected');
     }
 
-    /* Corrige le bug du retour du curseur au début de l'input */
+/* Déplacement du curseur au début de l'input */
+
     $("#search").keydown(function(e) {
         if (e.which == 38 || e.which == 40)
         return false;
     });
 
-    $("#search").keyup(function(e) {
+/* Requête des suggestions */
+
+    function getSuggestion(e) {
         if (e.which !== 38 && e.which !== 40) {
             address = $("#search").val();
             if (address == "") {
@@ -47,21 +50,14 @@ $(document).ready(function(){
             }
             else if (address !== oldAdress) {
                 oldAdress = address;
-                var req = url_adresse + nbResult + "&q=" + address + "&type=municipality";
+                var req = url_adresse + nbResult + "&q=" + address;
 
                 $.ajax({
                     url: req,
                     success: function(data) {
 
-                        $(".search__results").empty();
                         var suggestion = data['features'];
-                        nbSuggestion = suggestion.length;
-                        if (nbSuggestion !== 0) {
-                            for (var i = 0; i < nbSuggestion; i++) {
-                                $(".search__results").append('<div class="search__singleResult" id="' + suggestion[i]['properties']['id'] + '">' + suggestion[i]['properties']['label'] + '</div>');
-                            }
-                        }
-                        selected = nbSuggestion;
+                        displaySuggestion(suggestion);
 
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -72,13 +68,53 @@ $(document).ready(function(){
         } else {
             selectSuggestion(e.which);
         }
-    });
+    }
 
-    /* Requete API Ministère Culture (liste musées) */
+
+/* Afficher les suggestions */
+
+    function displaySuggestion(suggestion) {
+        $(".search__results").empty();
+        nbSuggestion = suggestion.length;
+        if (nbSuggestion !== 0) {
+            for (var i = 0; i < nbSuggestion; i++) {
+                $(".search__results").append('<div class="search__singleResult" id="' + suggestion[i]['properties']['id'] + '">' + suggestion[i]['properties']['label'] + '</div>');
+                
+            }
+        }
+        selected = nbSuggestion;
+    }
+
+/* Retourner le nombre de musées */   
+
+    function getNbMuseum(address) {
+        console.log(adresse);
+
+         $.ajax({
+            url: url_musee + valeur,
+            success: function(data) {
+            
+
+                if(data.nhits == 0){
+                    $('#infos').append('<p>Pas de musée dans la ville</p>');
+                } else {
+                    var length = data.records.length;
+
+                }
+
+                
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR, textStatus, errorThrown)
+            }
+        });
+    }
+
+/* Requete API Ministère Culture (liste musées) */
 
     var url_musee = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=";
 
-    function lanceRequete(valeur) {
+    function getMuseum(valeur) {
         console.log(valeur);
 
          $.ajax({
@@ -93,9 +129,9 @@ $(document).ready(function(){
                         centerMap(coordonnees_finales);
                     }
                 });
-
+                console.log(data.nhits);
                 if(data.nhits == 0){
-                    $('#infos').append('<p>Pas de musée dans la ville</p>');
+                    console.log('Pas de musée dans la ville');
                 } else {
                     var length = data.records.length;
 
@@ -124,18 +160,29 @@ $(document).ready(function(){
         turnBox(90);
     }
 
-    /* Lance la recherche à la soumission du formulaire */
+//////////////////////////////////////////////////////////////////
+/////////////////////////                /////////////////////////
+/////////////////////////   ÉVÈNEMENTS   /////////////////////////
+/////////////////////////                /////////////////////////
+//////////////////////////////////////////////////////////////////
+
+/* Récupere les suggestions lorsqu'une touche est relâchée */
+
+    $("#search").keyup(function(e) {
+        getSuggestion(e);
+    });
+/* Lance la recherche à la soumission du formulaire */
 
     $('#address__form').submit(function(e) {
         e.preventDefault();
-        lanceRequete($("#search").val());
+        getMuseum($("#search").val());
     });
 
-    /* Lance la recherche au click sur les suggestions */
+/* Lance la recherche au click sur les suggestions */
 
     $('body').on('click', '.search__singleResult',function(e) {
         e.preventDefault();
-        lanceRequete($(this).text());
+        getMuseum($(this).text());
     });
 
 
