@@ -76,13 +76,13 @@ $(document).ready(function(){
 
     /* Requete API Ministère Culture (liste musées) */
 
-    var url_musee = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=";
+    var url_musee = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=ville:";
 
     function lanceRequete(valeur) {
         console.log(valeur);
 
          $.ajax({
-            url: url_musee + valeur + "&facet=new_name&facet=nomdep&rows=100",
+            url: url_musee + valeur + "&rows=100",
             success: function(data) {
 
                 console.log(data);
