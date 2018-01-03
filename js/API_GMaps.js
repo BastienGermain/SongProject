@@ -9,15 +9,41 @@ function centerMap(adresse){
   map.setCenter(coord);
 }
 
-function findAdresse(adresse) {
+var infoArray = []; // Tableau regroupant toutes les bulles d'infos
+
+function findAdresse(adresse, nom_musee, horaires, adresse_musee, site_web) {
   coord.lat = adresse[0] || adresse.lat();
   coord.lng = adresse[1] || adresse.lng();
+
+  var contentString = '<h1 style="font-size: 40px;">' + nom_musee + '</h1>' +
+  '<p style="font-size: 20px;">Horaires : ' + horaires + '</p>' + 
+  '<p style="font-size: 20px;">Adresse : ' + adresse_musee + '</p>' + 
+  '<a href="http://' + site_web + '">Visiter le site</a>'; 
+
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+
+  infoArray.push(infowindow);
 
   var marker = new google.maps.Marker({
     position: coord
   });
   marker.setMap(map);
 
+  marker.addListener('click', function(e) {
+    // ferme toutes les autres bulles d'infos quand une nouvelle s'ouvre
+    for (var i = 0; i < infoArray.length; i++) {  
+         infoArray[i].close();
+    }
+    infowindow.open(map, marker);
+  });
+
+  // ferme la bulle au click sur la map
+  google.maps.event.addListener(map, 'click', function() {
+      infowindow.close();
+  });
+  
 }
 
 var src = "https://maps.googleapis.com/maps/api/js?key="+APIKEY+"&callback="+initMap.name;

@@ -112,15 +112,17 @@ $(document).ready(function(){
 
 /* Requete API Ministère Culture (liste musées) */
 
-    var url_musee = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=";
+    var url_musee = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=ville:";
 
     function getMuseum(valeur) {
         console.log(valeur);
 
          $.ajax({
-            url: url_musee + valeur + "&facet=new_name&facet=nomdep",
+            url: url_musee + valeur + "&rows=100",
             success: function(data) {
-            
+
+                console.log(data);
+
                 /* Centre la map sur la ville entrée */
                 var geocoder = new google.maps.Geocoder();
                 geocoder.geocode( { 'address': valeur}, function(data, status) {
@@ -137,27 +139,29 @@ $(document).ready(function(){
 
                     for(i = 0; i < length; i++) {
                         var coordonnees_finales = data.records[i].fields.coordonnees_finales;
+                        var nom_musee = data.records[i].fields.nom_du_musee;
+                        var horaires = data.records[i].fields.periode_ouverture;
+                        var adresse_musee = data.records[i].fields.adr;
+                        var site_web = data.records[i].fields.sitweb;
+
+                        if (horaires == undefined){
+                            horaires = 'Non renseignés';
+                        }
 
                         if(coordonnees_finales !== undefined) {
-                            findAdresse(coordonnees_finales);
-                        } else { 
-                            geocoder.geocode( { 'address': data.records[i].fields.adr}, function(data, status) {
-                                if( status == google.maps.GeocoderStatus.OK) {
-                                    coordonnees_finales = data[0].geometry.location;
-                                    findAdresse(coordonnees_finales);
-                                }
-                            });
+                            findAdresse(coordonnees_finales, nom_musee, horaires, adresse_musee, site_web);
                         }
                     }
                 }
 
-                
+
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown)
             }
         });
         turnBox(90);
+        $("#search").trigger("blur");
     }
 
 //////////////////////////////////////////////////////////////////
@@ -175,6 +179,7 @@ $(document).ready(function(){
 
     $('#address__form').submit(function(e) {
         e.preventDefault();
+        var value = $("#search").val() || $("#search").attr("placeholder");
         getMuseum($("#search").val());
     });
 
