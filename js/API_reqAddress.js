@@ -84,8 +84,9 @@ $(document).ready(function(){
          $.ajax({
             url: url_musee + valeur + "&facet=new_name&facet=nomdep&rows=100",
             success: function(data) {
+
                 console.log(data);
-            
+
                 /* Centre la map sur la ville entrée */
                 var geocoder = new google.maps.Geocoder();
                 geocoder.geocode( { 'address': valeur}, function(data, status) {
@@ -113,13 +114,14 @@ $(document).ready(function(){
                     }
                 }
 
-                
+
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown)
             }
         });
         turnBox(90);
+        $("#search").trigger("blur");
     }
 
     /* Lance la recherche à la soumission du formulaire */
