@@ -70,14 +70,29 @@
   &.selected
     background-color rgba(0, 0, 0, .05)
 .search__credits
+  display flex
+  position absolute
+  bottom 0%
+  width 100%
+  font-size 18px
+  align-items center
+  justify-content center
+  padding-bottom 20px
+  img
+    height 35px
+    margin 0 10px
+.search__input 
+  position relative
+  .clear__input
     display flex
-    position absolute
-    bottom 0%
-    width 100%
-    font-size 18px
     align-items center
-    justify-content center
-    padding-bottom 20px
-    img
-      height 35px
-      margin 0 10px
+    position absolute
+    height 100%
+    right 10px
+    top 0px
+    color black
+    cursor pointer
+  &.empty
+    .clear__input
+      cursor none
+      color rgba(0, 0, 0, .25)

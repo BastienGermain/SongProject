@@ -369,6 +369,27 @@ div.cube {
   height: 35px;
   margin: 0 10px;
 }
+.search__input {
+  position: relative;
+}
+.search__input .clear__input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  height: 100%;
+  right: 10px;
+  top: 0px;
+  color: #000;
+  cursor: pointer;
+}
+.search__input.empty .clear__input {
+  cursor: none;
+  color: rgba(0,0,0,0.25);
+}
 .list__section {
   display: -webkit-box;
   display: -ms-flexbox;

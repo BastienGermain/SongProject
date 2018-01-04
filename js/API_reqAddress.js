@@ -13,6 +13,13 @@ var nbResult = 5;
 
 $(document).ready(function(){
 
+/* Suppression du contenu de l'input */
+
+    function resetInput() {
+        $(".search__results").empty();
+        $("#search").val("").parent().addClass("empty");
+    }
+
 /* Selection des suggestions */
 
     function selectSuggestion(key) {
@@ -46,10 +53,14 @@ $(document).ready(function(){
     function getSuggestion(e) {
         if (e.which !== 38 && e.which !== 40) {
             address = $("#search").val();
+            
             if (address == "") {
-                $(".search__results").empty();
+                resetInput();
+            } else {
+                $("#search").parent().removeClass("empty");
             }
-            else if (address !== oldAdress) {
+            
+            if (address !== oldAdress) {
                 oldAdress = address;
                 var req = url_adresse + nbResult + "&q=" + address;
 
@@ -172,6 +183,12 @@ $(document).ready(function(){
 /////////////////////////   ÉVÈNEMENTS   /////////////////////////
 /////////////////////////                /////////////////////////
 //////////////////////////////////////////////////////////////////
+
+/* Efface le contenu de l'input */
+
+    $('.clear__input').click(function() {
+        resetInput();
+    });
 
 /* Récupere les suggestions lorsqu'une touche est relâchée */
 
