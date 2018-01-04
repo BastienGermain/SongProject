@@ -6,6 +6,8 @@ var address, nbSuggestion, selected;
 /* Variables API adresse */
 
 var url_adresse ="https://api-adresse.data.gouv.fr/search/?type=municipality&limit=";
+var url_musee = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=ville:";
+
 var nbResult = 5;
 
 
@@ -20,16 +22,15 @@ $(document).ready(function(){
             selected = (selected == 0) ? nbSuggestion : selected - 1;
         }
 
-        var index = selected + 1;
-        var selectedValue = $('.search__singleResult:nth-child(' + index + ')');
+        var selectedValue = $('.search__single').eq(selected);
 
         if (selected == nbSuggestion) {
             $("#search").val(address);
         } else {
-            $("#search").val(selectedValue.text());
+            $("#search").val(selectedValue.children('.search__singleResult').text());
         }
 
-        $('.search__singleResult.selected').removeClass('selected');
+        $('.search__single.selected').removeClass('selected');
         selectedValue.addClass('selected');
     }
 
@@ -57,7 +58,8 @@ $(document).ready(function(){
                     success: function(data) {
 
                         var suggestion = data['features'];
-                        displaySuggestion(suggestion);
+                        nbSuggestion = suggestion.length;
+                        displaySuggestion(suggestion, nbSuggestion);
 
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -73,59 +75,60 @@ $(document).ready(function(){
 
 /* Afficher les suggestions */
 
-    function displaySuggestion(suggestion) {
+    function displaySuggestion(suggestion, nbSuggestion) {
         $(".search__results").empty();
-        nbSuggestion = suggestion.length;
         if (nbSuggestion !== 0) {
             for (var i = 0; i < nbSuggestion; i++) {
-                $(".search__results").append('<div class="search__singleResult" id="' + suggestion[i]['properties']['id'] + '">' + suggestion[i]['properties']['label'] + '</div>');
-                
+                getNbMuseum(suggestion[i]['properties']['label'], i);
+                $(".search__results").append('<div class="search__single"><span class="search__singleResult">' + suggestion[i]['properties']['label'] + '</span><span class="search__singleNbMuseum"></span></div>');
             }
         }
         selected = nbSuggestion;
     }
 
-/* Retourner le nombre de musées */   
+/* Afficher le nombre de musées */
 
-    function getNbMuseum(address) {
-        console.log(adresse);
+    function displayNbMuseum(nbMuseum, i) {
+        var nbMuseumLabel;
+        if (nbMuseum == 0) {
+            nbMuseumLabel = "Pas de musée";
+        } else if (nbMuseum == 1) {
+            nbMuseumLabel = "1 musée";
+        } else {
+            nbMuseumLabel = nbMuseum + " musées";
+        }
+        $(".search__single").eq(i).children('.search__singleNbMuseum').html(nbMuseumLabel);
+    }
 
-         $.ajax({
-            url: url_musee + valeur,
+/* Retourner le nombre de musées */
+
+    function getNbMuseum(address, i) {
+        $.ajax({
+            url: url_musee + address,
             success: function(data) {
-            
-
-                if(data.nhits == 0){
-                    $('#infos').append('<p>Pas de musée dans la ville</p>');
-                } else {
-                    var length = data.records.length;
-
-                }
-
-                
+                nbMuseum = data.nhits;
+                displayNbMuseum(nbMuseum, i);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown)
             }
         });
+        
     }
-
 /* Requete API Ministère Culture (liste musées) */
 
-    var url_musee = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=ville:";
 
-    function getMuseum(valeur) {
-        console.log(valeur);
+    function getMuseum(address) {
 
          $.ajax({
-            url: url_musee + valeur + "&rows=100",
+            url: url_musee + address + "&rows=100",
             success: function(data) {
 
                 console.log(data);
 
                 /* Centre la map sur la ville entrée */
                 var geocoder = new google.maps.Geocoder();
-                geocoder.geocode( { 'address': valeur}, function(data, status) {
+                geocoder.geocode( { 'address': address}, function(data, status) {
                     if( status == google.maps.GeocoderStatus.OK) {
                         coordonnees_finales = data[0].geometry.location;
                         centerMap(coordonnees_finales);
@@ -180,14 +183,14 @@ $(document).ready(function(){
     $('#address__form').submit(function(e) {
         e.preventDefault();
         var value = $("#search").val() || $("#search").attr("placeholder");
-        getMuseum($("#search").val());
+        getMuseum(value);
     });
 
 /* Lance la recherche au click sur les suggestions */
 
-    $('body').on('click', '.search__singleResult',function(e) {
+    $('body').on('click', '.search__single',function(e) {
         e.preventDefault();
-        getMuseum($(this).text());
+        getMuseum($(this).children('.search__singleResult').text());
     });
 
 

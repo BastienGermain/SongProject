@@ -329,10 +329,13 @@ div.cube {
   border-radius: 5px;
   background-color: #fff;
 }
-.search__singleResult {
+.search__single {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -340,10 +343,10 @@ div.cube {
   padding: 0 15px;
   cursor: pointer;
 }
-.search__singleResult:hover {
+.search__single:hover {
   background-color: rgba(0,0,0,0.05);
 }
-.search__singleResult.selected {
+.search__single.selected {
   background-color: rgba(0,0,0,0.05);
 }
 .search__credits {
