@@ -209,7 +209,7 @@ $(document).ready(function(){
     });
 /* Lance la recherche à la soumission du formulaire */
 
-    $('#address__form').submit(function(e) {
+    $('#search__form').submit(function(e) {
         e.preventDefault();
         var value = $("#search").val() || $("#search").attr("placeholder");
         getMuseum(value);
@@ -217,7 +217,7 @@ $(document).ready(function(){
 
 /* Lance la recherche au click sur les suggestions */
 
-    $('body').on('click', '.search__single:not(.disabled)',function(e) {
+    $('body').on('click', '.search__single',function(e) {
         e.preventDefault();
         var value = [$(this).children('.search__singleResult').text(), $(this).children('.search__singleResult').data("cp") + ''.split(',')];
         console.log(value);
