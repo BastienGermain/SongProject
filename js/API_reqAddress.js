@@ -150,13 +150,13 @@ $(document).ready(function(){
                 console.log(data);
 
                 /* Centre la map sur la ville entrée */
-                /*var geocoder = new google.maps.Geocoder();
+                var geocoder = new google.maps.Geocoder();
                 geocoder.geocode( { 'address': address[0]}, function(data, status) {
                     if( status == google.maps.GeocoderStatus.OK) {
                         coordonnees_finales = data[0].geometry.location;
                         centerMap(coordonnees_finales);
                     }
-                });*/
+                });
                 console.log(data.nhits);
                 if(data.nhits == 0){
                     console.log('Pas de musée dans la ville');
@@ -180,6 +180,9 @@ $(document).ready(function(){
         turnBox(90);
         $("#search").trigger("blur");
     }
+
+/* Place les musées selon les coordonnées trouvées à partir de leur adresse avec leurs infos.
+Si les coordonnées ne sont pas trouvées, les coordonnées fournies par défaut par l'API (parfois erronées) sont utilisées */
 
     function geoCode(data, i) {
 
@@ -223,7 +226,7 @@ $(document).ready(function(){
     $("#search").keyup(function(e) {
         getSuggestion(e);
     });
-    
+
 /* Lance la recherche à la soumission du formulaire */
 
     $('#search__form').submit(function(e) {
