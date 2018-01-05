@@ -260,11 +260,8 @@ div.cube {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
 }
-#address__form {
+#search__form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -283,7 +280,7 @@ div.cube {
   font-family: bariolregular;
   font-size: 20px;
   font-weight: bold;
-  color: #696969;
+  color: #000;
   background: none;
   border: none;
   border-radius: 5px;
@@ -319,7 +316,7 @@ div.cube {
 .search__logo {
   width: 300px;
   color: #fff;
-  margin-bottom: 20px;
+  margin: 20px;
 }
 .search__results {
   position: absolute;
@@ -354,7 +351,6 @@ div.cube {
 .search__single.disabled {
   color: rgba(0,0,0,0.25);
   background-color: rgba(255,255,255,0.8);
-  cursor: none;
 }
 .search__single:hover {
   background-color: rgba(255,255,255,0.5);
