@@ -5,8 +5,8 @@ var address, nbSuggestion, selected;
 
 /* Variables API adresse */
 
-var url_adresse ="https://api-adresse.data.gouv.fr/search/?type=municipality&limit=";
-var url_musee = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=ville:";
+var url_adresse ="https://geo.api.gouv.fr/communes?fields=code,nom,surface,codesPostaux&nom=";
+var url_musee = "https://data.culturecommunication.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=";
 
 var nbResult = 5;
 
@@ -62,19 +62,19 @@ $(document).ready(function(){
             
             if (address !== oldAdress) {
                 oldAdress = address;
-                var req = url_adresse + nbResult + "&q=" + address;
+                var req = url_adresse + address;
 
                 $.ajax({
                     url: req,
                     success: function(data) {
 
-                        var suggestion = data['features'];
+                        var suggestion = data.slice(0, nbResult);
                         nbSuggestion = suggestion.length;
                         displaySuggestion(suggestion, nbSuggestion);
 
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
-                        console.log(jqXHR, textStatus, errorThrown)
+                        console.log(jqXHR, textStatus, errorThrown);
                     }
                 });
             }
@@ -90,8 +90,9 @@ $(document).ready(function(){
         $(".search__results").empty();
         if (nbSuggestion !== 0) {
             for (var i = 0; i < nbSuggestion; i++) {
-                getNbMuseum(suggestion[i]['properties']['label'], i);
-                $(".search__results").append('<div class="search__single"><span class="search__singleResult">' + suggestion[i]['properties']['label'] + '</span><span class="search__singleNbMuseum"></span></div>');
+                var value = [suggestion[i]['nom'], suggestion[i]['codesPostaux']];
+                getNbMuseum(value, i);
+                $(".search__results").append('<div class="search__single"><span class="search__singleResult" data-cp="' + value[1] + '">' + value[0] + '</span><span class="search__singleNbMuseum"></span></div>');
             }
         }
         selected = nbSuggestion;
@@ -103,6 +104,7 @@ $(document).ready(function(){
         var nbMuseumLabel;
         if (nbMuseum == 0) {
             nbMuseumLabel = "Pas de musée";
+            $(".search__single").eq(i).addClass('disabled');
         } else if (nbMuseum == 1) {
             nbMuseumLabel = "1 musée";
         } else {
@@ -115,31 +117,41 @@ $(document).ready(function(){
 
     function getNbMuseum(address, i) {
         $.ajax({
-            url: url_musee + address,
+            url: url_musee + getRequestUrl(address) + "&rows=100",
             success: function(data) {
                 nbMuseum = data.nhits;
                 displayNbMuseum(nbMuseum, i);
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR, textStatus, errorThrown)
+                console.log(jqXHR, textStatus, errorThrown);
             }
         });
         
+    }
+
+    function getRequestUrl(address) {
+        var request = "";
+        for (var i =  0; i < address[1].length; i++) {
+            request += address[0] + ' AND ' + address[1][i];
+            if (i != address[1].length-1) {
+                 request += ' OR ';
+            }
+        }
+        return request;
     }
 /* Requete API Ministère Culture (liste musées) */
 
 
     function getMuseum(address) {
-
-         $.ajax({
-            url: url_musee + address + "&rows=100",
+        $.ajax({
+            url: url_musee + getRequestUrl(address) + "&rows=100",
             success: function(data) {
 
                 console.log(data);
 
                 /* Centre la map sur la ville entrée */
                 var geocoder = new google.maps.Geocoder();
-                geocoder.geocode( { 'address': address}, function(data, status) {
+                geocoder.geocode( { 'address': address[0]}, function(data, status) {
                     if( status == google.maps.GeocoderStatus.OK) {
                         coordonnees_finales = data[0].geometry.location;
                         centerMap(coordonnees_finales);
@@ -171,7 +183,7 @@ $(document).ready(function(){
 
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR, textStatus, errorThrown)
+                console.log(jqXHR, textStatus, errorThrown);
             }
         });
         turnBox(90);
@@ -199,15 +211,17 @@ $(document).ready(function(){
 
     $('#address__form').submit(function(e) {
         e.preventDefault();
-        var value = $("#search").val() || $("#search").attr("placeholder");
+        var value = [$("#search").val() || $("#search").attr("placeholder")];
         getMuseum(value);
     });
 
 /* Lance la recherche au click sur les suggestions */
 
-    $('body').on('click', '.search__single',function(e) {
+    $('body').on('click', '.search__single:not(.disabled)',function(e) {
         e.preventDefault();
-        getMuseum($(this).children('.search__singleResult').text());
+        var value = [$(this).children('.search__singleResult').text(), $(this).children('.search__singleResult').data("cp") + ''.split(',')];
+        console.log(value);
+        getMuseum(value);
     });
 
 

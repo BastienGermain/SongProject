@@ -7,7 +7,7 @@
   justify-content: center
 #address__form
   display flex
-  align-items center
+  align-items stretch
   justify-content: center
   position: relative
 #search
@@ -39,7 +39,7 @@
   color white
   background none
   margin-left 20px
-  padding 5px 10px
+  padding 5px 15px
 .search__logo
   font-size 50px
   color white
@@ -57,7 +57,7 @@
   background: none
   border none
   border-radius 5px
-  background-color white
+  overflow hidden
 .search__single
   display flex
   justify-content space-between
@@ -65,10 +65,14 @@
   height 50px
   padding 0 15px
   cursor pointer
+  background-color white
+  &.disabled
+    color rgba(0, 0, 0, .25)
+    background-color: rgba(255,255,255,0.8)
   &:hover
-    background-color rgba(0, 0, 0, .05)
+    background-color rgba(255,255,255,0.5)
   &.selected
-    background-color rgba(0, 0, 0, .05)
+    background-color rgba(255,255,255,0.5)
 .search__credits
   display flex
   position absolute
