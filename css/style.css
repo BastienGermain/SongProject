@@ -87,7 +87,7 @@ video {
   font: inherit;
   vertical-align: baseline;
   word-break: initial;
-  font-family: Barlow Condensed;
+  font-family: bariolregular;
 }
 article,
 aside,
@@ -135,6 +135,13 @@ table {
   border-spacing: 0;
 }
 /* theme */
+@font-face {
+  font-family: 'bariolregular';
+  src: url("../font/bariol_regular-webfont.eot");
+  src: url("../font/bariol_regular-webfont.eot?#iefix") format('embedded-opentype'), url("../font/bariol_regular-webfont.woff2") format('woff2'), url("../font/bariol_regular-webfont.woff") format('woff'), url("../font/bariol_regular-webfont.ttf") format('truetype'), url("../font/bariol_regular-webfont.svg#bariolregular") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 html,
 body {
   margin: 0;
@@ -273,7 +280,7 @@ div.cube {
   width: 500px;
   height: 50px;
   padding: 0 15px;
-  font-family: Barlow Condensed;
+  font-family: bariolregular;
   font-size: 20px;
   font-weight: bold;
   color: #696969;
@@ -299,7 +306,7 @@ div.cube {
   opacity: 0;
 }
 #submit {
-  font-family: Barlow Condensed;
+  font-family: bariolregular;
   font-size: 20px;
   text-transform: uppercase;
   border: 3px #fff solid;
@@ -310,7 +317,7 @@ div.cube {
   padding: 5px 15px;
 }
 .search__logo {
-  font-size: 50px;
+  width: 300px;
   color: #fff;
   margin-bottom: 20px;
 }
@@ -347,6 +354,7 @@ div.cube {
 .search__single.disabled {
   color: rgba(0,0,0,0.25);
   background-color: rgba(255,255,255,0.8);
+  cursor: none;
 }
 .search__single:hover {
   background-color: rgba(255,255,255,0.5);
@@ -394,6 +402,19 @@ div.cube {
 .search__input.empty .clear__input {
   cursor: none;
   color: rgba(0,0,0,0.25);
+}
+.search__slides {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.search__slide {
+  display: none;
+}
+.search__slide.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 .list__section {
   display: -webkit-box;
