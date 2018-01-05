@@ -53,13 +53,13 @@ $(document).ready(function(){
     function getSuggestion(e) {
         if (e.which !== 38 && e.which !== 40) {
             address = $("#search").val();
-            
+
             if (address == "") {
                 resetInput();
             } else {
                 $("#search").parent().removeClass("empty");
             }
-            
+
             if (address !== oldAdress) {
                 oldAdress = address;
                 var req = url_adresse + address;
@@ -126,7 +126,7 @@ $(document).ready(function(){
                 console.log(jqXHR, textStatus, errorThrown);
             }
         });
-        
+
     }
 
     function getRequestUrl(address) {
@@ -164,19 +164,9 @@ $(document).ready(function(){
                     var length = data.records.length;
 
                     for(i = 0; i < length; i++) {
-                        var coordonnees_finales = data.records[i].fields.coordonnees_finales;
-                        var nom_musee = data.records[i].fields.nom_du_musee;
-                        var horaires = data.records[i].fields.periode_ouverture;
-                        var adresse_musee = data.records[i].fields.adr;
-                        var site_web = data.records[i].fields.sitweb;
 
-                        if (horaires == undefined){
-                            horaires = 'Non renseignés';
-                        }
+                      geoCode(data, i);
 
-                        if(coordonnees_finales !== undefined) {
-                            findAdresse(coordonnees_finales, nom_musee, horaires, adresse_musee, site_web);
-                        }
                     }
                 }
 
@@ -188,6 +178,30 @@ $(document).ready(function(){
         });
         turnBox(90);
         $("#search").trigger("blur");
+    }
+
+    function geoCode(data, i) {
+
+      var coord_alt = data.records[i].fields.coordonnees_finales;
+      var nom_musee = data.records[i].fields.nom_du_musee;
+      var horaires = data.records[i].fields.periode_ouverture;
+      var adresse_musee = data.records[i].fields.adr + " " + data.records[i].fields.cp + " " + data.records[i].fields.ville;
+      var site_web = data.records[i].fields.sitweb;
+      var coordonnees_finales;
+
+      if (horaires == undefined){
+          horaires = 'Non renseignés';
+      }
+
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode( { 'address': adresse_musee }, function(data, status) {
+          if( status == google.maps.GeocoderStatus.OK) {
+              coordonnees_finales = data[0].geometry.location;
+          } else {
+              coordonnees_finales = coord_alt;
+          }
+          findAdresse(coordonnees_finales, nom_musee, horaires, adresse_musee, site_web);
+      });
     }
 
 //////////////////////////////////////////////////////////////////
