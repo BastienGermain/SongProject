@@ -150,13 +150,13 @@ $(document).ready(function(){
                 console.log(data);
 
                 /* Centre la map sur la ville entrée */
-                var geocoder = new google.maps.Geocoder();
+                /*var geocoder = new google.maps.Geocoder();
                 geocoder.geocode( { 'address': address[0]}, function(data, status) {
                     if( status == google.maps.GeocoderStatus.OK) {
                         coordonnees_finales = data[0].geometry.location;
                         centerMap(coordonnees_finales);
                     }
-                });
+                });*/
                 console.log(data.nhits);
                 if(data.nhits == 0){
                     console.log('Pas de musée dans la ville');
@@ -169,6 +169,7 @@ $(document).ready(function(){
 
                     }
                 }
+
 
 
             },
@@ -201,6 +202,7 @@ $(document).ready(function(){
               coordonnees_finales = coord_alt;
           }
           findAdresse(coordonnees_finales, nom_musee, horaires, adresse_musee, site_web);
+          centerMapToMarkers();
       });
     }
 
