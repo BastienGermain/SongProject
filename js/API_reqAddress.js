@@ -211,7 +211,7 @@ $(document).ready(function(){
 
     $('#address__form').submit(function(e) {
         e.preventDefault();
-        var value = [$("#search").val() || $("#search").attr("placeholder")];
+        var value = $("#search").val() || $("#search").attr("placeholder");
         getMuseum(value);
     });
 
