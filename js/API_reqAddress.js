@@ -259,7 +259,7 @@ Si les coordonnées ne sont pas trouvées, les coordonnées fournies par défaut
 
     $('body').on('click', '.search__single',function(e) {
         e.preventDefault();
-        var value = [$(this).children('.search__singleResult').text(), $(this).children('.search__singleResult').data("cp") + ''.split(',')];
+        var value = [$(this).children('.search__singleResult').text(), $(this).children('.search__singleResult').data("cp").split(',')];
         console.log(value);
         getMuseum(value);
     });
