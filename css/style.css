@@ -427,7 +427,7 @@ div.cube {
   cursor: none;
   color: rgba(0,0,0,0.25);
 }
-.list__section {
+.map__section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -441,4 +441,48 @@ div.cube {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+.map_sideBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 44px;
+  height: 100%;
+  background-color: rgba(255,255,255,0.8);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.map_sideBar:hover {
+  width: 100px;
+}
+.map_sideBar:hover .map__sideBarText {
+  -webkit-transform: rotate(90deg) translateY(14px);
+          transform: rotate(90deg) translateY(14px);
+}
+.map_sideBar:hover .map__sideBarIcon {
+  -webkit-transform: translateX(28px);
+          transform: translateX(28px);
+}
+.map__sideBarText {
+  transition: all 0.5s;
+  position: absolute;
+  -webkit-transform: rotate(90deg) translateY(44px);
+          transform: rotate(90deg) translateY(44px);
+  width: 100vh;
+  text-align: center;
+}
+.map__sideBarIcon {
+  transition: all 0.5s;
+  margin: 10px;
+  -webkit-transform: translateX(0px);
+          transform: translateX(0px);
 }

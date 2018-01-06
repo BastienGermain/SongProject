@@ -215,10 +215,16 @@ Si les coordonnées ne sont pas trouvées, les coordonnées fournies par défaut
 /////////////////////////                /////////////////////////
 //////////////////////////////////////////////////////////////////
 
-/* Efface le contenu de l'input */
+/* Retourne à la recherche */
 
     $('.clear__input').click(function() {
         resetInput();
+    });
+
+/* Efface le contenu de l'input */
+
+    $('.map_sideBar').click(function() {
+        turnBox(-90);
     });
 
 /* Récupere les suggestions lorsqu'une touche est relâchée */
