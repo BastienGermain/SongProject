@@ -2,7 +2,7 @@
 
 var oldAdress = "";
 var address, nbSuggestion, selected;
-var filtreURL = new RegExp( /(((w{3}\.)|(http\:\/\/))?[\w./\-%~=#@]+(\.fr))/,'g');
+var filtreURL = new RegExp( /((w{3}\.)?[\w./\-%~=#@]+((\.fr)|(\.org)|(\.com)))([\w./\-%~=#@]+)?/,'g');
 
 /* Variables API adresse */
 
