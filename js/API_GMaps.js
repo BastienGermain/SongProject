@@ -73,8 +73,11 @@ function findAdresse(adresse, nom_musee, horaires, adresse_musee, site_web) {
 
   var contentString = '<h1 style="font-size: 40px;">' + nom_musee + '</h1>' +
   '<p style="font-size: 20px;">Horaires : ' + horaires + '</p>' +
-  '<p style="font-size: 20px;">Adresse : ' + adresse_musee + '</p>' +
-  '<a href="http://' + site_web + '" target="_blank">Visiter le site</a>';
+  '<p style="font-size: 20px;">Adresse : ' + adresse_musee;
+  if(site_web !== null) {
+    contentString += '</p>' +
+    '<a href="http://' + site_web[0] + '" target="_blank">Visiter le site</a>'
+  }
 
   var infowindow = new google.maps.InfoWindow({
     content: contentString
