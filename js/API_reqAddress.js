@@ -171,6 +171,7 @@ $(document).ready(function(){
                 }
 
 
+
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown);
@@ -179,6 +180,9 @@ $(document).ready(function(){
         turnBox(90);
         $("#search").trigger("blur");
     }
+
+/* Place les musées selon les coordonnées trouvées à partir de leur adresse avec leurs infos.
+Si les coordonnées ne sont pas trouvées, les coordonnées fournies par défaut par l'API (parfois erronées) sont utilisées */
 
     function geoCode(data, i) {
 
@@ -201,6 +205,7 @@ $(document).ready(function(){
               coordonnees_finales = coord_alt;
           }
           findAdresse(coordonnees_finales, nom_musee, horaires, adresse_musee, site_web);
+          centerMapToMarkers();
       });
     }
 
@@ -221,7 +226,7 @@ $(document).ready(function(){
     $("#search").keyup(function(e) {
         getSuggestion(e);
     });
-    
+
 /* Lance la recherche à la soumission du formulaire */
 
     $('#search__form').submit(function(e) {
