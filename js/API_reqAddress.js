@@ -2,7 +2,7 @@
 
 var oldAdress = "";
 var address, nbSuggestion, selected;
-var filtreWeb = new RegExp( /((w{3}\.)[\w./\-%~=#@]+(\.fr))/,'g');
+var filtreURL = new RegExp( /(((w{3}\.)|(http\:\/\/))?[\w./\-%~=#@]+(\.fr))/,'g');
 
 /* Variables API adresse */
 
@@ -192,7 +192,7 @@ Si les coordonnées ne sont pas trouvées, les coordonnées fournies par défaut
       var horaires = data.records[i].fields.periode_ouverture;
       var adresse_musee = data.records[i].fields.adr + " " + data.records[i].fields.cp + " " + data.records[i].fields.ville;
       console.log(data.records[i].fields.sitweb);
-      var site_web = data.records[i].fields.sitweb.match(filtreWeb);
+      var site_web = data.records[i].fields.sitweb.match(filtreURL);
       console.log(site_web);
       var coordonnees_finales;
 
