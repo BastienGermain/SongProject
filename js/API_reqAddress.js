@@ -225,6 +225,7 @@ Si les coordonnées ne sont pas trouvées, les coordonnées fournies par défaut
 
     $('.map_sideBar').click(function() {
         turnBox(-90);
+        deleteMarkers();
     });
 
 /* Récupere les suggestions lorsqu'une touche est relâchée */

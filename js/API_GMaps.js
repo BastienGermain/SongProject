@@ -47,6 +47,13 @@ let markers = {
   }
 };
 
+function deleteMarkers() {
+  for (var i = 0; i < markers.list.length; ++i) {
+    markers.list[i].setMap(null);
+  }
+  markers.list = [];
+}
+
 function centerMap(adresse){
   coord.lat = adresse[0] || adresse.lat();
   coord.lng = adresse[1] || adresse.lng();
