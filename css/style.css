@@ -260,6 +260,8 @@ div.cube {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background: url("./../img/MacronLouvre.jpg") 50%;
+  background-size: cover;
 }
 #search__form {
   display: -webkit-box;
@@ -358,13 +360,37 @@ div.cube {
 .search__single.selected {
   background-color: rgba(255,255,255,0.5);
 }
+.search__bottomBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+}
+.search__slider {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 25px;
+  padding: 20px 0;
+}
+.search__slides {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
 .search__credits {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: absolute;
-  bottom: 0%;
-  width: 100%;
   font-size: 18px;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -372,7 +398,9 @@ div.cube {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding-bottom: 20px;
+  padding: 20px 0;
+  color: #000;
+  background-color: rgba(255,255,255,0.8);
 }
 .search__credits img {
   height: 35px;
@@ -398,19 +426,6 @@ div.cube {
 .search__input.empty .clear__input {
   cursor: none;
   color: rgba(0,0,0,0.25);
-}
-.search__slides {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-.search__slide {
-  display: none;
-}
-.search__slide.show {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
 }
 .list__section {
   display: -webkit-box;

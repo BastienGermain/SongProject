@@ -5,10 +5,6 @@
     <title></title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/TurnBox.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/API_GMaps.js"></script>
-    <script src="js/API_reqAddress.js"></script>
   </head>
   <body>
     <div id="viewport">
@@ -25,25 +21,27 @@
               <div class="search__results">
             	</div>
             </form>
-            <div class="search__slider">
-              <div class="search__slides">
+            <div class="search__bottomBar">
+              <div class="search__slider">
                 <span>«&nbsp;</span>
-                <p class="search__slide show">Vous prenez un après midi où vous n'avez rien à faire.</p>
-                <p class="search__slide">Profitez-en. Parce qu'après Le Louvre c'est une quainzaine d'euros.</p>
-                <p class="search__slide">C'est pas compliqué, vous prenez le RER jusqu'à Châtelet...</p>
+                <div class="search__slides">
+                  <p class="search__slide">Vous prenez un après midi où vous n'avez rien à faire. Vous y allez entre potes.</p>
+                  <p class="search__slide" style="display: none;">Profitez-en, vous êtes encore jeunes. Parce qu'après le Louvre c'est une quainzaine d'euros.</p>
+                  <p class="search__slide" style="display: none;">C'est pas compliqué, vous prenez le RER jusqu'à Châtelet et la ligne 1...</p>
+                </div>
                 <span>&nbsp;»</span>
               </div>
-              <div class="search__author">Émilie VERGER, professeure d'Histoire de l'art</div>
-            </div>
-            <div class="search__credits">
-              <p>Avec les données de</p>
-              <a href="https://developers.google.com/maps" target="_blank">
-                <img src="./img/google.svg" alt="Logo de Google">
-              </a>
-              <p>et</p>
-              <a href="https://www.data.gouv.fr" target="_blank">
-                <img src="./img/datagouvfr.svg" alt="Logo de Data.gouv.fr">
-              </a>
+              <div class="search__credits">
+                <p>Avec les données de</p>
+                <a href="https://developers.google.com/maps" target="_blank">
+                  <img src="./img/google.svg" alt="Logo de Google">
+                </a>
+                <p>et</p>
+                <a href="https://www.data.gouv.fr" target="_blank">
+                  <img src="./img/datagouvfr.svg" alt="Logo de Data.gouv.fr">
+                </a>
+                <p>plateforme française</p>
+              </div>
             </div>
           </div>
           <div class="map__section">
@@ -57,5 +55,20 @@
         </div>
       </section>
     </div>
+    <script src="js/TurnBox.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/API_GMaps.js"></script>
+    <script src="js/API_reqAddress.js"></script>
+    <script>
+      $(document).ready(function(){
+        count = 0;
+        function slide() {
+          $('.search__slides').children().eq(count).fadeIn(300).delay(4400).fadeOut(300);
+          count = (count == 2) ? 0 : count+1;
+          console.log(count);
+        }
+        setInterval(slide, 5000);
+      });
+    </script>
   </body>
 </html>
