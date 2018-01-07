@@ -12,6 +12,7 @@
         <div class="cube">
           <div class="search__section">
             <div class="search__logo"><img src="./img/CulturezVous.svg" alt="Logo de Culturez-vous"></div>
+            <h1 class="search__text">Cherchez les musées par ville en France !</h1>
             <form id="search__form">
               <div class="search__input empty">
                 <input type="text" autocomplete="off" placeholder="Paris" id="search" autofocus>
@@ -23,13 +24,11 @@
             </form>
             <div class="search__bottomBar">
               <div class="search__slider">
-                <span>«&nbsp;</span>
                 <div class="search__slides">
-                  <p class="search__slide">Vous prenez un après midi où vous n'avez rien à faire. Vous y allez entre potes.</p>
-                  <p class="search__slide" style="display: none;">Profitez-en, vous êtes encore jeunes. Parce qu'après le Louvre c'est une quinzaine d'euros.</p>
-                  <p class="search__slide" style="display: none;">C'est pas compliqué, vous prenez le RER jusqu'à Châtelet et la ligne 1...</p>
+                  <p class="search__slide">«&nbsp;Vous prenez un après midi où vous n'avez rien à faire. Vous y allez entre potes.&nbsp;»</p>
+                  <p class="search__slide" style="display: none;">«&nbsp;Profitez-en, vous êtes encore jeunes. Parce qu'après le Louvre c'est une quinzaine d'euros.&nbsp;»</p>
+                  <p class="search__slide" style="display: none;">«&nbsp;C'est pas compliqué, vous prenez le RER jusqu'à Châtelet et la ligne 1...&nbsp;»</p>
                 </div>
-                <span>&nbsp;»</span>
               </div>
               <div class="search__credits">
                 <p>Avec les données de</p>
@@ -67,7 +66,7 @@
       $(document).ready(function(){
         count = 0;
         function slide() {
-          $('.search__slides').children().eq(count).fadeIn(300).delay(4400).fadeOut(300);
+          $('.search__slides').children().eq(count).fadeIn(500).delay(4000).fadeOut(500);
           count = (count == 2) ? 0 : count+1;
           console.log(count);
         }

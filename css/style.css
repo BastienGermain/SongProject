@@ -320,6 +320,11 @@ div.cube {
   color: #fff;
   margin: 20px;
 }
+.search__text {
+  text-transform: uppercase;
+  font-size: 25px;
+  margin: 20px;
+}
 .search__results {
   position: absolute;
   top: 100%;
@@ -485,4 +490,27 @@ div.cube {
   margin: 10px;
   -webkit-transform: translateX(0px);
           transform: translateX(0px);
+}
+.window__museumName {
+  font-size: 25px !important;
+}
+.window__museumSchedules {
+  margin: 15px 0px;
+}
+.window__museumAddress {
+  margin-bottom: 15px;
+}
+.window__museumWebsite a {
+  font-size: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-decoration: none;
+  color: #696969;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.window__museumWebsite a:hover {
+  color: #000;
 }

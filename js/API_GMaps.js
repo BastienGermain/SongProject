@@ -71,12 +71,12 @@ function findAdresse(adresse, nom_musee, horaires, adresse_musee, site_web) {
   coord.lat = adresse[0] || adresse.lat();
   coord.lng = adresse[1] || adresse.lng();
 
-  var contentString = '<h1 style="font-size: 40px;">' + nom_musee + '</h1>' +
-  '<p style="font-size: 20px;">Horaires : ' + horaires + '</p>' +
-  '<p style="font-size: 20px;">Adresse : ' + adresse_musee;
+  var contentString = '<h1 class="window__museumName" style="font-size: 40px;">' + nom_musee + '</h1><hr>' +
+  '<p class="window__museumSchedules" style="font-size: 20px;">Horaires : ' + horaires + '</p>' +
+  '<p class="window__museumAddress" style="font-size: 20px;">Adresse : ' + adresse_musee + '</p>';
   if(site_web !== null) {
-    contentString += '</p>' +
-    '<a href="http://' + site_web[0] + '" target="_blank">Visiter le site</a>'
+    contentString += '<p class="window__museumWebsite">' +
+    '<a href="http://' + site_web[0] + '" target="_blank"><span class="material-icons">launch</span>&nbsp;Visiter le site</a></p>';
   }
 
   var infowindow = new google.maps.InfoWindow({
